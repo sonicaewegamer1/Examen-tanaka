@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace examen
+{ }
+public interface IUsable
 {
-    class Class2
-    {
-    }
+    void Use(Player player);
 }
