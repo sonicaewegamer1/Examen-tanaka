@@ -21,15 +21,51 @@ namespace examen
         {
             Console.WriteLine(Description);
 
+            bool blocking = false; // es para bloquear ataques
 
-            while (player.IsAlive() &&
-                  enemy.IsAlive())
+            while (player.IsAlive() && enemy.IsAlive())
             {
-                player.Attack(enemy);
+                Console.WriteLine("");
+                Console.WriteLine("¿Que haces?");
+                Console.WriteLine("1. Atacar");
+                Console.WriteLine("2. Cubrirse");
+
+                string choice = Console.ReadLine();
+
+                if (choice == "1")
+                {
+                    player.Attack(enemy);
+                    blocking = false;
+                }
+
+                else if (choice == "2")
+                {
+                    Console.WriteLine("Te cubres.");
+                    blocking = true; // para cubrirse
+                }
+
+                else
+                {
+                    Console.WriteLine("Accion invalida.");
+                    continue;
+                }
+
 
                 if (enemy.IsAlive())
                 {
-                    enemy.Attack(player);
+                    if (blocking)
+                    {
+                        Console.WriteLine(
+                            "Bloqueaste el ataque del goblin."
+                        );
+
+                        blocking = false;
+                    }
+
+                    else
+                    {
+                        enemy.Attack(player);
+                    }
                 }
             }
 

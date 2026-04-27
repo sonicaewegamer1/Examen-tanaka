@@ -21,7 +21,17 @@ namespace examen
         }
         public void Attack(IEntity target)
         {
-            target.Health -= Damage;//acortado de target.Health = target.Health - Damage;
+            target.Health -= Damage;
+
+            Console.WriteLine(
+                Name + " ataca y hace "
+                + Damage + " de daño."
+            );
+
+            Console.WriteLine(
+                target.Name + " tiene "
+                + target.Health + " de vida."
+            );
         }
 
         public bool IsAlive()

@@ -61,26 +61,26 @@ namespace examen
 
         public void GoblinPath()
         {
+            Console.WriteLine("");
+            Console.WriteLine("¡Comienza el combate!"); // introducción al combate
+
             Combat fight =
                 new Combat(
                     "Un goblin aparece.",
-                    new Enemy("Goblin",15,3)
+                    new Enemy("Goblin", 15, 3)
                 );
-
 
             bool alive = fight.Execute(player);
 
-
-            if(!alive)
+            if (!alive)
             {
                 Restart();
                 return;
             }
 
-
             Console.WriteLine("");
             Console.WriteLine("Derrotaste al goblin.");
-            Console.WriteLine("Llegas al mundo goblin.");
+            Console.WriteLine("Llegas al mundo goblin.");//temporal
             Console.WriteLine("Final Bueno.");
         }
 
