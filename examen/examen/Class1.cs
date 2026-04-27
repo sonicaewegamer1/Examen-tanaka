@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace examen
-{ }
-public interface Iusable
 {
-    void Use(Player player);
+    class Class1
+    {
+    }
 }
