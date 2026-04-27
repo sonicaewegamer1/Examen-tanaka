@@ -16,19 +16,23 @@ namespace examen
             this.enemy = enemy;
         }
 
-
         public override bool Execute(Player player)
         {
             Console.WriteLine(Description);
 
-            bool blocking = false; // es para bloquear ataques
+            bool blocking = false;     // si está bloqueando
+            bool canBlock = true;      // regla: no puede bloquear dos turnos seguidos
 
             while (player.IsAlive() && enemy.IsAlive())
             {
                 Console.WriteLine("");
                 Console.WriteLine("¿Que haces?");
                 Console.WriteLine("1. Atacar");
-                Console.WriteLine("2. Cubrirse");
+
+                if (canBlock)
+                    Console.WriteLine("2. Cubrirse");
+                else
+                    Console.WriteLine("2. Cubrirse (no disponible)");
 
                 string choice = Console.ReadLine();
 
@@ -36,19 +40,31 @@ namespace examen
                 {
                     player.Attack(enemy);
 
-                    // evita que baje de 0 pero solo es visual
+                    //evita negativo visual
                     if (enemy.Health < 0)
                         enemy.Health = 0;
 
                     Console.WriteLine(enemy.Name + " tiene " + enemy.Health + " de vida.");
 
                     blocking = false;
+
+                    //si atacas, puedes bloquear, pero debes haber atacado antes
+                    canBlock = true;
                 }
 
                 else if (choice == "2")
                 {
+                    if (!canBlock)
+                    {
+                        Console.WriteLine("No puedes cubrirte dos turnos seguidos.");
+                        continue;
+                    }
+
                     Console.WriteLine("Te cubres.");
                     blocking = true;
+
+                    // cooldown para no bloquear seguido
+                    canBlock = false;
                 }
 
                 else
@@ -57,25 +73,23 @@ namespace examen
                     continue;
                 }
 
-                // agregado para que el enemigo no ataque si está muerto, con la vida negativa seguia pegando eternamente
+                // evita que se buguee al estar con vida negativa
                 if (!enemy.IsAlive())
-                {
-                    break; // corta el turno del enemigo muerto
-                }
+                    break;
 
+                // turno del enemigo
                 if (enemy.IsAlive())
                 {
                     if (blocking)
                     {
                         Console.WriteLine("Bloqueaste el ataque del enemigo.");
-
                         blocking = false;
                     }
                     else
                     {
                         enemy.Attack(player);
 
-                        // agregado para que no se ponga en negativo visualmente
+                        // evita que se ponga en negativo visualmente
                         if (player.Health < 0)
                             player.Health = 0;
                     }

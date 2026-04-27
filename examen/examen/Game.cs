@@ -135,7 +135,20 @@ namespace examen
                 Restart();
                 return;
             }
-        }
+        
+            Console.WriteLine("");
+            Console.WriteLine("El Lycantropo cae ante ti...");
+            Console.WriteLine("El aire del santuario cambia...");
+            Console.WriteLine("Tu olor ya no es humano.");
+            Console.WriteLine("sigues tu camino");
+            Console.WriteLine("");
+            Console.WriteLine("Llegas al reino Lycantropo...");
+            Console.WriteLine("Hueles como uno de ellos.");
+            Console.WriteLine("Te aceptan.");
+            Console.WriteLine("");
+            Console.WriteLine("BEST ENDING : PARTE DE LA MANADA");
+        
+    }
 
         public void TrapPath()
         {
