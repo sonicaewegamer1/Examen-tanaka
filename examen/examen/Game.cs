@@ -61,8 +61,8 @@ namespace examen
 
         public void GoblinPath()
         {
-            CombatSituation fight =
-                new CombatSituation(
+            Combat fight =
+                new Combat(
                     "Un goblin aparece.",
                     new Enemy("Goblin",15,3)
                 );
@@ -88,13 +88,18 @@ namespace examen
 
         public void TreasurePath()
         {
-            EventSituation potion =
-                new EventSituation(
+            Event potion =
+                new Event(
                     "Encuentras una pocion.",
                     new HealthPotion()
                 );
 
             potion.Execute(player);
+
+            Console.WriteLine("Encuentras una sala del tesoro.");
+        
+
+        potion.Execute(player);
 
             Console.WriteLine("");
             Console.WriteLine("Encuentras una sala del tesoro.");
@@ -121,10 +126,17 @@ namespace examen
 
             string answer = Console.ReadLine();
 
-
-            if(answer=="si")
+            if (answer == "si")
             {
                 Start();
+            }
+            else if (answer == "no")
+            {
+                Console.WriteLine("Game Over.");
+            }
+            else
+            {
+                Console.WriteLine(" el hada no te entiende ");
             }
         }
 
