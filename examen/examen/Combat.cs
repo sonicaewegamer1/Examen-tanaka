@@ -35,13 +35,20 @@ namespace examen
                 if (choice == "1")
                 {
                     player.Attack(enemy);
+
+                    // evita que baje de 0 pero solo es visual
+                    if (enemy.Health < 0)
+                        enemy.Health = 0;
+
+                    Console.WriteLine(enemy.Name + " tiene " + enemy.Health + " de vida.");
+
                     blocking = false;
                 }
 
                 else if (choice == "2")
                 {
                     Console.WriteLine("Te cubres.");
-                    blocking = true; // para cubrirse
+                    blocking = true;
                 }
 
                 else
@@ -50,21 +57,27 @@ namespace examen
                     continue;
                 }
 
+                // agregado para que el enemigo no ataque si está muerto, con la vida negativa seguia pegando eternamente
+                if (!enemy.IsAlive())
+                {
+                    break; // corta el turno del enemigo muerto
+                }
 
                 if (enemy.IsAlive())
                 {
                     if (blocking)
                     {
-                        Console.WriteLine(
-                            "Bloqueaste el ataque del goblin."
-                        );
+                        Console.WriteLine("Bloqueaste el ataque del enemigo.");
 
                         blocking = false;
                     }
-
                     else
                     {
                         enemy.Attack(player);
+
+                        // agregado para que no se ponga en negativo visualmente
+                        if (player.Health < 0)
+                            player.Health = 0;
                     }
                 }
             }

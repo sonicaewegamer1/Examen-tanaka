@@ -96,17 +96,46 @@ namespace examen
 
             potion.Execute(player);
 
-            Console.WriteLine("Encuentras una sala del tesoro.");
-        
-
-        potion.Execute(player);
-
             Console.WriteLine("");
-            Console.WriteLine("Encuentras una sala del tesoro.");
-            Console.WriteLine("Final Neutral.");
+            Console.WriteLine("El santuario se divide en dos caminos...");
+            Console.WriteLine("1. Cámara del guerrero");
+            Console.WriteLine("2. Pasillo oscuro");
+
+            string choice = Console.ReadLine();
+
+            // espada
+            if (choice == "1")
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Encuentras una espada antigua.");
+                Console.WriteLine("Tu daño aumenta");
+
+                player.Damage += 5; // daño aumentado
+            }
+
+            else if (choice == "2")
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Sigues tu camino");
+            }
+            Console.WriteLine("");
+            Console.WriteLine("Un Lycantropo aparece...");
+
+            // AGREGAR COMBATE
+            Combat fight =
+                new Combat(
+                    "este emerge de las sombras...",
+                    new Enemy("Lycantropo", 45, 7)
+                );
+
+            bool alive = fight.Execute(player);
+
+            if (!alive)
+            {
+                Restart();
+                return;
+            }
         }
-
-
 
         public void TrapPath()
         {
